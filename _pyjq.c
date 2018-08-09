@@ -781,13 +781,13 @@ struct __pyx_opt_args_5_pyjq_pyobj_to_jv;
 /* "_pyjq.pyx":131
  *         return adict
  * 
- * cdef jv pyobj_to_jv(object pyobj, void*custom_encoder=NULL):             # <<<<<<<<<<<<<<
+ * cdef jv pyobj_to_jv(object pyobj, void*encoder=NULL):             # <<<<<<<<<<<<<<
  *     if isinstance(pyobj, six.text_type):
  *         pyobj = pyobj.encode('utf-8')
  */
 struct __pyx_opt_args_5_pyjq_pyobj_to_jv {
   int __pyx_n;
-  void *custom_encoder;
+  void *encoder;
 };
 
 /* "_pyjq.pyx":166
@@ -811,7 +811,7 @@ struct __pyx_obj_5_pyjq_Script {
   struct __pyx_vtabstruct_5_pyjq_Script *__pyx_vtab;
   PyObject *_errors;
   jq_state *_jq;
-  PyObject *_custom_encoder;
+  PyObject *_encoder;
 };
 
 
@@ -1339,6 +1339,7 @@ static const char __pyx_k_reduce[] = "__reduce__";
 static const char __pyx_k_script[] = "script";
 static const char __pyx_k_cpython[] = "cpython";
 static const char __pyx_k_default[] = "default";
+static const char __pyx_k_encoder[] = "encoder";
 static const char __pyx_k_prepare[] = "__prepare__";
 static const char __pyx_k_version[] = "version";
 static const char __pyx_k_getstate[] = "__getstate__";
@@ -1360,7 +1361,6 @@ static const char __pyx_k_string_types[] = "string_types";
 static const char __pyx_k_version_info[] = "version_info";
 static const char __pyx_k_library_paths[] = "library_paths";
 static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
-static const char __pyx_k_custom_encoder[] = "custom_encoder";
 static const char __pyx_k_implementation[] = "implementation";
 static const char __pyx_k_JQ_LIBRARY_PATH[] = "JQ_LIBRARY_PATH";
 static const char __pyx_k_setstate_cython[] = "__setstate_cython__";
@@ -1373,7 +1373,7 @@ static const char __pyx_k_Exception_thrown_when_a_script[] = "\n    Exception th
 static const char __pyx_k_r_could_not_be_converted_to_jso[] = "{!r} could not be converted to json!!";
 static const char __pyx_k_Key_of_json_object_must_be_a_str[] = "Key of json object must be a str, but got {}";
 static const char __pyx_k_Result_of_jq_have_multiple_eleme[] = "Result of jq have multiple elements";
-static const char __pyx_k_self__custom_encoder_self__jq_ca[] = "self._custom_encoder,self._jq cannot be converted to a Python object for pickling";
+static const char __pyx_k_self__encoder_self__jq_cannot_be[] = "self._encoder,self._jq cannot be converted to a Python object for pickling";
 static PyObject *__pyx_kp_s_Exception_thrown_when_a_script;
 static PyObject *__pyx_kp_s_Failed_to_initialize_jq;
 static PyObject *__pyx_n_s_IndexError;
@@ -1395,10 +1395,10 @@ static PyObject *__pyx_n_s_binary_type;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_collections;
 static PyObject *__pyx_n_s_cpython;
-static PyObject *__pyx_n_s_custom_encoder;
 static PyObject *__pyx_n_s_default;
 static PyObject *__pyx_n_s_doc;
 static PyObject *__pyx_n_s_encode;
+static PyObject *__pyx_n_s_encoder;
 static PyObject *__pyx_n_s_enumerate;
 static PyObject *__pyx_n_s_format;
 static PyObject *__pyx_n_s_getstate;
@@ -1422,7 +1422,7 @@ static PyObject *__pyx_n_s_reduce;
 static PyObject *__pyx_n_s_reduce_cython;
 static PyObject *__pyx_n_s_reduce_ex;
 static PyObject *__pyx_n_s_script;
-static PyObject *__pyx_kp_s_self__custom_encoder_self__jq_ca;
+static PyObject *__pyx_kp_s_self__encoder_self__jq_cannot_be;
 static PyObject *__pyx_n_s_setstate;
 static PyObject *__pyx_n_s_setstate_cython;
 static PyObject *__pyx_n_s_six;
@@ -1435,7 +1435,7 @@ static PyObject *__pyx_n_s_value;
 static PyObject *__pyx_n_s_vars;
 static PyObject *__pyx_n_s_version;
 static PyObject *__pyx_n_s_version_info;
-static int __pyx_pf_5_pyjq_6Script___init__(struct __pyx_obj_5_pyjq_Script *__pyx_v_self, char const *__pyx_v_script, PyObject *__pyx_v_vars, PyObject *__pyx_v_library_paths, PyObject *__pyx_v_custom_encoder); /* proto */
+static int __pyx_pf_5_pyjq_6Script___init__(struct __pyx_obj_5_pyjq_Script *__pyx_v_self, char const *__pyx_v_script, PyObject *__pyx_v_vars, PyObject *__pyx_v_library_paths, PyObject *__pyx_v_encoder); /* proto */
 static void __pyx_pf_5_pyjq_6Script_2__dealloc__(struct __pyx_obj_5_pyjq_Script *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_5_pyjq_6Script_4all(struct __pyx_obj_5_pyjq_Script *__pyx_v_self, PyObject *__pyx_v_pyobj); /* proto */
 static PyObject *__pyx_pf_5_pyjq_6Script_6first(struct __pyx_obj_5_pyjq_Script *__pyx_v_self, PyObject *__pyx_v_value, PyObject *__pyx_v_default); /* proto */
@@ -1843,7 +1843,7 @@ static PyObject *__pyx_f_5_pyjq_jv_to_pyobj(jv __pyx_v_jval) {
  *             it = jv_object_iter_next(jval, it)
  *         return adict             # <<<<<<<<<<<<<<
  * 
- * cdef jv pyobj_to_jv(object pyobj, void*custom_encoder=NULL):
+ * cdef jv pyobj_to_jv(object pyobj, void*encoder=NULL):
  */
     __Pyx_XDECREF(__pyx_r);
     __Pyx_INCREF(__pyx_v_adict);
@@ -1890,13 +1890,13 @@ static PyObject *__pyx_f_5_pyjq_jv_to_pyobj(jv __pyx_v_jval) {
 /* "_pyjq.pyx":131
  *         return adict
  * 
- * cdef jv pyobj_to_jv(object pyobj, void*custom_encoder=NULL):             # <<<<<<<<<<<<<<
+ * cdef jv pyobj_to_jv(object pyobj, void*encoder=NULL):             # <<<<<<<<<<<<<<
  *     if isinstance(pyobj, six.text_type):
  *         pyobj = pyobj.encode('utf-8')
  */
 
 static jv __pyx_f_5_pyjq_pyobj_to_jv(PyObject *__pyx_v_pyobj, struct __pyx_opt_args_5_pyjq_pyobj_to_jv *__pyx_optional_args) {
-  void *__pyx_v_custom_encoder = ((void *)NULL);
+  void *__pyx_v_encoder = ((void *)NULL);
   jv __pyx_v_jval;
   CYTHON_UNUSED PyObject *__pyx_v_i = NULL;
   PyObject *__pyx_v_item = NULL;
@@ -1924,14 +1924,14 @@ static jv __pyx_f_5_pyjq_pyobj_to_jv(PyObject *__pyx_v_pyobj, struct __pyx_opt_a
   __Pyx_RefNannySetupContext("pyobj_to_jv", 0);
   if (__pyx_optional_args) {
     if (__pyx_optional_args->__pyx_n > 0) {
-      __pyx_v_custom_encoder = __pyx_optional_args->custom_encoder;
+      __pyx_v_encoder = __pyx_optional_args->encoder;
     }
   }
   __Pyx_INCREF(__pyx_v_pyobj);
 
   /* "_pyjq.pyx":132
  * 
- * cdef jv pyobj_to_jv(object pyobj, void*custom_encoder=NULL):
+ * cdef jv pyobj_to_jv(object pyobj, void*encoder=NULL):
  *     if isinstance(pyobj, six.text_type):             # <<<<<<<<<<<<<<
  *         pyobj = pyobj.encode('utf-8')
  *         return jv_string_sized(pyobj, len(pyobj))
@@ -1947,7 +1947,7 @@ static jv __pyx_f_5_pyjq_pyobj_to_jv(PyObject *__pyx_v_pyobj, struct __pyx_opt_a
   if (__pyx_t_4) {
 
     /* "_pyjq.pyx":133
- * cdef jv pyobj_to_jv(object pyobj, void*custom_encoder=NULL):
+ * cdef jv pyobj_to_jv(object pyobj, void*encoder=NULL):
  *     if isinstance(pyobj, six.text_type):
  *         pyobj = pyobj.encode('utf-8')             # <<<<<<<<<<<<<<
  *         return jv_string_sized(pyobj, len(pyobj))
@@ -1975,7 +1975,7 @@ static jv __pyx_f_5_pyjq_pyobj_to_jv(PyObject *__pyx_v_pyobj, struct __pyx_opt_a
 
     /* "_pyjq.pyx":132
  * 
- * cdef jv pyobj_to_jv(object pyobj, void*custom_encoder=NULL):
+ * cdef jv pyobj_to_jv(object pyobj, void*encoder=NULL):
  *     if isinstance(pyobj, six.text_type):             # <<<<<<<<<<<<<<
  *         pyobj = pyobj.encode('utf-8')
  *         return jv_string_sized(pyobj, len(pyobj))
@@ -2142,7 +2142,7 @@ static jv __pyx_f_5_pyjq_pyobj_to_jv(PyObject *__pyx_v_pyobj, struct __pyx_opt_a
  *     elif isinstance(pyobj, (list, tuple)):
  *         jval = jv_array()             # <<<<<<<<<<<<<<
  *         for i, item in enumerate(pyobj):
- *             jval = jv_array_append(jval, pyobj_to_jv(item, custom_encoder))
+ *             jval = jv_array_append(jval, pyobj_to_jv(item, encoder))
  */
     __pyx_v_jval = jv_array();
 
@@ -2150,7 +2150,7 @@ static jv __pyx_f_5_pyjq_pyobj_to_jv(PyObject *__pyx_v_pyobj, struct __pyx_opt_a
  *     elif isinstance(pyobj, (list, tuple)):
  *         jval = jv_array()
  *         for i, item in enumerate(pyobj):             # <<<<<<<<<<<<<<
- *             jval = jv_array_append(jval, pyobj_to_jv(item, custom_encoder))
+ *             jval = jv_array_append(jval, pyobj_to_jv(item, encoder))
  *         return jval
  */
     __Pyx_INCREF(__pyx_int_0);
@@ -2207,12 +2207,12 @@ static jv __pyx_f_5_pyjq_pyobj_to_jv(PyObject *__pyx_v_pyobj, struct __pyx_opt_a
       /* "_pyjq.pyx":144
  *         jval = jv_array()
  *         for i, item in enumerate(pyobj):
- *             jval = jv_array_append(jval, pyobj_to_jv(item, custom_encoder))             # <<<<<<<<<<<<<<
+ *             jval = jv_array_append(jval, pyobj_to_jv(item, encoder))             # <<<<<<<<<<<<<<
  *         return jval
  *     elif isinstance(pyobj, dict):
  */
       __pyx_t_13.__pyx_n = 1;
-      __pyx_t_13.custom_encoder = __pyx_v_custom_encoder;
+      __pyx_t_13.encoder = __pyx_v_encoder;
       __pyx_t_12 = __pyx_f_5_pyjq_pyobj_to_jv(__pyx_v_item, &__pyx_t_13); 
       __pyx_v_jval = jv_array_append(__pyx_v_jval, __pyx_t_12);
 
@@ -2220,7 +2220,7 @@ static jv __pyx_f_5_pyjq_pyobj_to_jv(PyObject *__pyx_v_pyobj, struct __pyx_opt_a
  *     elif isinstance(pyobj, (list, tuple)):
  *         jval = jv_array()
  *         for i, item in enumerate(pyobj):             # <<<<<<<<<<<<<<
- *             jval = jv_array_append(jval, pyobj_to_jv(item, custom_encoder))
+ *             jval = jv_array_append(jval, pyobj_to_jv(item, encoder))
  *         return jval
  */
     }
@@ -2229,7 +2229,7 @@ static jv __pyx_f_5_pyjq_pyobj_to_jv(PyObject *__pyx_v_pyobj, struct __pyx_opt_a
 
     /* "_pyjq.pyx":145
  *         for i, item in enumerate(pyobj):
- *             jval = jv_array_append(jval, pyobj_to_jv(item, custom_encoder))
+ *             jval = jv_array_append(jval, pyobj_to_jv(item, encoder))
  *         return jval             # <<<<<<<<<<<<<<
  *     elif isinstance(pyobj, dict):
  *         jval = jv_object()
@@ -2247,7 +2247,7 @@ static jv __pyx_f_5_pyjq_pyobj_to_jv(PyObject *__pyx_v_pyobj, struct __pyx_opt_a
   }
 
   /* "_pyjq.pyx":146
- *             jval = jv_array_append(jval, pyobj_to_jv(item, custom_encoder))
+ *             jval = jv_array_append(jval, pyobj_to_jv(item, encoder))
  *         return jval
  *     elif isinstance(pyobj, dict):             # <<<<<<<<<<<<<<
  *         jval = jv_object()
@@ -2499,7 +2499,7 @@ static jv __pyx_f_5_pyjq_pyobj_to_jv(PyObject *__pyx_v_pyobj, struct __pyx_opt_a
  *                     key = six.text_type(key)
  *             else:
  *                 raise TypeError("Key of json object must be a str, but got {}".format(type(key)))             # <<<<<<<<<<<<<<
- *             jval = jv_object_set(jval, pyobj_to_jv(key, custom_encoder), pyobj_to_jv(value, custom_encoder))
+ *             jval = jv_object_set(jval, pyobj_to_jv(key, encoder), pyobj_to_jv(value, encoder))
  *         return jval
  */
       /*else*/ {
@@ -2560,15 +2560,15 @@ static jv __pyx_f_5_pyjq_pyobj_to_jv(PyObject *__pyx_v_pyobj, struct __pyx_opt_a
       /* "_pyjq.pyx":154
  *             else:
  *                 raise TypeError("Key of json object must be a str, but got {}".format(type(key)))
- *             jval = jv_object_set(jval, pyobj_to_jv(key, custom_encoder), pyobj_to_jv(value, custom_encoder))             # <<<<<<<<<<<<<<
+ *             jval = jv_object_set(jval, pyobj_to_jv(key, encoder), pyobj_to_jv(value, encoder))             # <<<<<<<<<<<<<<
  *         return jval
  *     elif pyobj is None:
  */
       __pyx_t_13.__pyx_n = 1;
-      __pyx_t_13.custom_encoder = __pyx_v_custom_encoder;
+      __pyx_t_13.encoder = __pyx_v_encoder;
       __pyx_t_12 = __pyx_f_5_pyjq_pyobj_to_jv(__pyx_v_key, &__pyx_t_13); 
       __pyx_t_13.__pyx_n = 1;
-      __pyx_t_13.custom_encoder = __pyx_v_custom_encoder;
+      __pyx_t_13.encoder = __pyx_v_encoder;
       __pyx_t_17 = __pyx_f_5_pyjq_pyobj_to_jv(__pyx_v_value, &__pyx_t_13); 
       __pyx_v_jval = jv_object_set(__pyx_v_jval, __pyx_t_12, __pyx_t_17);
 
@@ -2584,7 +2584,7 @@ static jv __pyx_f_5_pyjq_pyobj_to_jv(PyObject *__pyx_v_pyobj, struct __pyx_opt_a
 
     /* "_pyjq.pyx":155
  *                 raise TypeError("Key of json object must be a str, but got {}".format(type(key)))
- *             jval = jv_object_set(jval, pyobj_to_jv(key, custom_encoder), pyobj_to_jv(value, custom_encoder))
+ *             jval = jv_object_set(jval, pyobj_to_jv(key, encoder), pyobj_to_jv(value, encoder))
  *         return jval             # <<<<<<<<<<<<<<
  *     elif pyobj is None:
  *         return jv_null()
@@ -2593,7 +2593,7 @@ static jv __pyx_f_5_pyjq_pyobj_to_jv(PyObject *__pyx_v_pyobj, struct __pyx_opt_a
     goto __pyx_L0;
 
     /* "_pyjq.pyx":146
- *             jval = jv_array_append(jval, pyobj_to_jv(item, custom_encoder))
+ *             jval = jv_array_append(jval, pyobj_to_jv(item, encoder))
  *         return jval
  *     elif isinstance(pyobj, dict):             # <<<<<<<<<<<<<<
  *         jval = jv_object()
@@ -2602,7 +2602,7 @@ static jv __pyx_f_5_pyjq_pyobj_to_jv(PyObject *__pyx_v_pyobj, struct __pyx_opt_a
   }
 
   /* "_pyjq.pyx":156
- *             jval = jv_object_set(jval, pyobj_to_jv(key, custom_encoder), pyobj_to_jv(value, custom_encoder))
+ *             jval = jv_object_set(jval, pyobj_to_jv(key, encoder), pyobj_to_jv(value, encoder))
  *         return jval
  *     elif pyobj is None:             # <<<<<<<<<<<<<<
  *         return jv_null()
@@ -2617,13 +2617,13 @@ static jv __pyx_f_5_pyjq_pyobj_to_jv(PyObject *__pyx_v_pyobj, struct __pyx_opt_a
  *     elif pyobj is None:
  *         return jv_null()             # <<<<<<<<<<<<<<
  *     else:
- *         if custom_encoder != NULL:
+ *         if encoder != NULL:
  */
     __pyx_r = jv_null();
     goto __pyx_L0;
 
     /* "_pyjq.pyx":156
- *             jval = jv_object_set(jval, pyobj_to_jv(key, custom_encoder), pyobj_to_jv(value, custom_encoder))
+ *             jval = jv_object_set(jval, pyobj_to_jv(key, encoder), pyobj_to_jv(value, encoder))
  *         return jval
  *     elif pyobj is None:             # <<<<<<<<<<<<<<
  *         return jv_null()
@@ -2634,23 +2634,23 @@ static jv __pyx_f_5_pyjq_pyobj_to_jv(PyObject *__pyx_v_pyobj, struct __pyx_opt_a
   /* "_pyjq.pyx":159
  *         return jv_null()
  *     else:
- *         if custom_encoder != NULL:             # <<<<<<<<<<<<<<
- *             return pyobj_to_jv((<object>custom_encoder)(pyobj))
+ *         if encoder != NULL:             # <<<<<<<<<<<<<<
+ *             return pyobj_to_jv((<object>encoder)(pyobj))
  *         raise TypeError("{!r} could not be converted to json!!".format(type(pyobj)))
  */
   /*else*/ {
-    __pyx_t_7 = ((__pyx_v_custom_encoder != NULL) != 0);
+    __pyx_t_7 = ((__pyx_v_encoder != NULL) != 0);
     if (__pyx_t_7) {
 
       /* "_pyjq.pyx":160
  *     else:
- *         if custom_encoder != NULL:
- *             return pyobj_to_jv((<object>custom_encoder)(pyobj))             # <<<<<<<<<<<<<<
+ *         if encoder != NULL:
+ *             return pyobj_to_jv((<object>encoder)(pyobj))             # <<<<<<<<<<<<<<
  *         raise TypeError("{!r} could not be converted to json!!".format(type(pyobj)))
  * 
  */
-      __Pyx_INCREF(((PyObject *)__pyx_v_custom_encoder));
-      __pyx_t_11 = ((PyObject *)__pyx_v_custom_encoder); __pyx_t_1 = NULL;
+      __Pyx_INCREF(((PyObject *)__pyx_v_encoder));
+      __pyx_t_11 = ((PyObject *)__pyx_v_encoder); __pyx_t_1 = NULL;
       if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_11))) {
         __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_11);
         if (likely(__pyx_t_1)) {
@@ -2700,15 +2700,15 @@ static jv __pyx_f_5_pyjq_pyobj_to_jv(PyObject *__pyx_v_pyobj, struct __pyx_opt_a
       /* "_pyjq.pyx":159
  *         return jv_null()
  *     else:
- *         if custom_encoder != NULL:             # <<<<<<<<<<<<<<
- *             return pyobj_to_jv((<object>custom_encoder)(pyobj))
+ *         if encoder != NULL:             # <<<<<<<<<<<<<<
+ *             return pyobj_to_jv((<object>encoder)(pyobj))
  *         raise TypeError("{!r} could not be converted to json!!".format(type(pyobj)))
  */
     }
 
     /* "_pyjq.pyx":161
- *         if custom_encoder != NULL:
- *             return pyobj_to_jv((<object>custom_encoder)(pyobj))
+ *         if encoder != NULL:
+ *             return pyobj_to_jv((<object>encoder)(pyobj))
  *         raise TypeError("{!r} could not be converted to json!!".format(type(pyobj)))             # <<<<<<<<<<<<<<
  * 
  * cdef void Script_error_cb(void*x, jv err):
@@ -2769,7 +2769,7 @@ static jv __pyx_f_5_pyjq_pyobj_to_jv(PyObject *__pyx_v_pyobj, struct __pyx_opt_a
   /* "_pyjq.pyx":131
  *         return adict
  * 
- * cdef jv pyobj_to_jv(object pyobj, void*custom_encoder=NULL):             # <<<<<<<<<<<<<<
+ * cdef jv pyobj_to_jv(object pyobj, void*encoder=NULL):             # <<<<<<<<<<<<<<
  *     if isinstance(pyobj, six.text_type):
  *         pyobj = pyobj.encode('utf-8')
  */
@@ -2836,9 +2836,9 @@ static void __pyx_f_5_pyjq_Script_error_cb(void *__pyx_v_x, jv __pyx_v_err) {
 }
 
 /* "_pyjq.pyx":174
- *     cdef PyObject* _custom_encoder
+ *     cdef PyObject* _encoder
  * 
- *     def __init__(self, const char*script, vars={}, library_paths=[], custom_encoder=None):             # <<<<<<<<<<<<<<
+ *     def __init__(self, const char*script, vars={}, library_paths=[], encoder=None):             # <<<<<<<<<<<<<<
  *         self._errors = []
  *         self._jq = jq_init()
  */
@@ -2849,12 +2849,12 @@ static int __pyx_pw_5_pyjq_6Script_1__init__(PyObject *__pyx_v_self, PyObject *_
   char const *__pyx_v_script;
   PyObject *__pyx_v_vars = 0;
   PyObject *__pyx_v_library_paths = 0;
-  PyObject *__pyx_v_custom_encoder = 0;
+  PyObject *__pyx_v_encoder = 0;
   int __pyx_r;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__init__ (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_script,&__pyx_n_s_vars,&__pyx_n_s_library_paths,&__pyx_n_s_custom_encoder,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_script,&__pyx_n_s_vars,&__pyx_n_s_library_paths,&__pyx_n_s_encoder,0};
     PyObject* values[4] = {0,0,0,0};
     values[1] = __pyx_k__2;
     values[2] = __pyx_k__3;
@@ -2894,7 +2894,7 @@ static int __pyx_pw_5_pyjq_6Script_1__init__(PyObject *__pyx_v_self, PyObject *_
         CYTHON_FALLTHROUGH;
         case  3:
         if (kw_args > 0) {
-          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_custom_encoder);
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_encoder);
           if (value) { values[3] = value; kw_args--; }
         }
       }
@@ -2917,7 +2917,7 @@ static int __pyx_pw_5_pyjq_6Script_1__init__(PyObject *__pyx_v_self, PyObject *_
     __pyx_v_script = __Pyx_PyObject_AsString(values[0]); if (unlikely((!__pyx_v_script) && PyErr_Occurred())) __PYX_ERR(0, 174, __pyx_L3_error)
     __pyx_v_vars = values[1];
     __pyx_v_library_paths = values[2];
-    __pyx_v_custom_encoder = values[3];
+    __pyx_v_encoder = values[3];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
@@ -2927,14 +2927,14 @@ static int __pyx_pw_5_pyjq_6Script_1__init__(PyObject *__pyx_v_self, PyObject *_
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_5_pyjq_6Script___init__(((struct __pyx_obj_5_pyjq_Script *)__pyx_v_self), __pyx_v_script, __pyx_v_vars, __pyx_v_library_paths, __pyx_v_custom_encoder);
+  __pyx_r = __pyx_pf_5_pyjq_6Script___init__(((struct __pyx_obj_5_pyjq_Script *)__pyx_v_self), __pyx_v_script, __pyx_v_vars, __pyx_v_library_paths, __pyx_v_encoder);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static int __pyx_pf_5_pyjq_6Script___init__(struct __pyx_obj_5_pyjq_Script *__pyx_v_self, char const *__pyx_v_script, PyObject *__pyx_v_vars, PyObject *__pyx_v_library_paths, PyObject *__pyx_v_custom_encoder) {
+static int __pyx_pf_5_pyjq_6Script___init__(struct __pyx_obj_5_pyjq_Script *__pyx_v_self, char const *__pyx_v_script, PyObject *__pyx_v_vars, PyObject *__pyx_v_library_paths, PyObject *__pyx_v_encoder) {
   jv __pyx_v_args;
   PyObject *__pyx_v_k = NULL;
   PyObject *__pyx_v_v = NULL;
@@ -2955,7 +2955,7 @@ static int __pyx_pf_5_pyjq_6Script___init__(struct __pyx_obj_5_pyjq_Script *__py
 
   /* "_pyjq.pyx":175
  * 
- *     def __init__(self, const char*script, vars={}, library_paths=[], custom_encoder=None):
+ *     def __init__(self, const char*script, vars={}, library_paths=[], encoder=None):
  *         self._errors = []             # <<<<<<<<<<<<<<
  *         self._jq = jq_init()
  * 
@@ -2969,45 +2969,45 @@ static int __pyx_pf_5_pyjq_6Script___init__(struct __pyx_obj_5_pyjq_Script *__py
   __pyx_t_1 = 0;
 
   /* "_pyjq.pyx":176
- *     def __init__(self, const char*script, vars={}, library_paths=[], custom_encoder=None):
+ *     def __init__(self, const char*script, vars={}, library_paths=[], encoder=None):
  *         self._errors = []
  *         self._jq = jq_init()             # <<<<<<<<<<<<<<
  * 
- *         if custom_encoder is not None:
+ *         if encoder is not None:
  */
   __pyx_v_self->_jq = jq_init();
 
   /* "_pyjq.pyx":178
  *         self._jq = jq_init()
  * 
- *         if custom_encoder is not None:             # <<<<<<<<<<<<<<
- *             self._custom_encoder = <PyObject*>custom_encoder
+ *         if encoder is not None:             # <<<<<<<<<<<<<<
+ *             self._encoder = <PyObject*>encoder
  * 
  */
-  __pyx_t_2 = (__pyx_v_custom_encoder != Py_None);
+  __pyx_t_2 = (__pyx_v_encoder != Py_None);
   __pyx_t_3 = (__pyx_t_2 != 0);
   if (__pyx_t_3) {
 
     /* "_pyjq.pyx":179
  * 
- *         if custom_encoder is not None:
- *             self._custom_encoder = <PyObject*>custom_encoder             # <<<<<<<<<<<<<<
+ *         if encoder is not None:
+ *             self._encoder = <PyObject*>encoder             # <<<<<<<<<<<<<<
  * 
  *         if not self._jq:
  */
-    __pyx_v_self->_custom_encoder = ((PyObject *)__pyx_v_custom_encoder);
+    __pyx_v_self->_encoder = ((PyObject *)__pyx_v_encoder);
 
     /* "_pyjq.pyx":178
  *         self._jq = jq_init()
  * 
- *         if custom_encoder is not None:             # <<<<<<<<<<<<<<
- *             self._custom_encoder = <PyObject*>custom_encoder
+ *         if encoder is not None:             # <<<<<<<<<<<<<<
+ *             self._encoder = <PyObject*>encoder
  * 
  */
   }
 
   /* "_pyjq.pyx":181
- *             self._custom_encoder = <PyObject*>custom_encoder
+ *             self._encoder = <PyObject*>encoder
  * 
  *         if not self._jq:             # <<<<<<<<<<<<<<
  *             raise RuntimeError('Failed to initialize jq')
@@ -3030,7 +3030,7 @@ static int __pyx_pf_5_pyjq_6Script___init__(struct __pyx_obj_5_pyjq_Script *__py
     __PYX_ERR(0, 182, __pyx_L1_error)
 
     /* "_pyjq.pyx":181
- *             self._custom_encoder = <PyObject*>custom_encoder
+ *             self._encoder = <PyObject*>encoder
  * 
  *         if not self._jq:             # <<<<<<<<<<<<<<
  *             raise RuntimeError('Failed to initialize jq')
@@ -3257,9 +3257,9 @@ static int __pyx_pf_5_pyjq_6Script___init__(struct __pyx_obj_5_pyjq_Script *__py
   }
 
   /* "_pyjq.pyx":174
- *     cdef PyObject* _custom_encoder
+ *     cdef PyObject* _encoder
  * 
- *     def __init__(self, const char*script, vars={}, library_paths=[], custom_encoder=None):             # <<<<<<<<<<<<<<
+ *     def __init__(self, const char*script, vars={}, library_paths=[], encoder=None):             # <<<<<<<<<<<<<<
  *         self._errors = []
  *         self._jq = jq_init()
  */
@@ -3382,7 +3382,7 @@ static void __pyx_pf_5_pyjq_6Script_2__dealloc__(struct __pyx_obj_5_pyjq_Script 
  * 
  *     def all(self, pyobj):             # <<<<<<<<<<<<<<
  *         "Transform object by jq script, returning all results as list"
- *         cdef jv value = pyobj_to_jv(pyobj, custom_encoder=self._custom_encoder)
+ *         cdef jv value = pyobj_to_jv(pyobj, encoder=self._encoder)
  */
 
 /* Python wrapper */
@@ -3430,18 +3430,18 @@ static PyObject *__pyx_pf_5_pyjq_6Script_4all(struct __pyx_obj_5_pyjq_Script *__
   /* "_pyjq.pyx":207
  *     def all(self, pyobj):
  *         "Transform object by jq script, returning all results as list"
- *         cdef jv value = pyobj_to_jv(pyobj, custom_encoder=self._custom_encoder)             # <<<<<<<<<<<<<<
+ *         cdef jv value = pyobj_to_jv(pyobj, encoder=self._encoder)             # <<<<<<<<<<<<<<
  *         jq_start(self._jq, value, 0)
  *         cdef list output = []
  */
   __pyx_t_2.__pyx_n = 1;
-  __pyx_t_2.custom_encoder = __pyx_v_self->_custom_encoder;
+  __pyx_t_2.encoder = __pyx_v_self->_encoder;
   __pyx_t_1 = __pyx_f_5_pyjq_pyobj_to_jv(__pyx_v_pyobj, &__pyx_t_2); 
   __pyx_v_value = __pyx_t_1;
 
   /* "_pyjq.pyx":208
  *         "Transform object by jq script, returning all results as list"
- *         cdef jv value = pyobj_to_jv(pyobj, custom_encoder=self._custom_encoder)
+ *         cdef jv value = pyobj_to_jv(pyobj, encoder=self._encoder)
  *         jq_start(self._jq, value, 0)             # <<<<<<<<<<<<<<
  *         cdef list output = []
  * 
@@ -3449,7 +3449,7 @@ static PyObject *__pyx_pf_5_pyjq_6Script_4all(struct __pyx_obj_5_pyjq_Script *__
   jq_start(__pyx_v_self->_jq, __pyx_v_value, 0);
 
   /* "_pyjq.pyx":209
- *         cdef jv value = pyobj_to_jv(pyobj, custom_encoder=self._custom_encoder)
+ *         cdef jv value = pyobj_to_jv(pyobj, encoder=self._encoder)
  *         jq_start(self._jq, value, 0)
  *         cdef list output = []             # <<<<<<<<<<<<<<
  * 
@@ -3711,7 +3711,7 @@ static PyObject *__pyx_pf_5_pyjq_6Script_4all(struct __pyx_obj_5_pyjq_Script *__
  * 
  *     def all(self, pyobj):             # <<<<<<<<<<<<<<
  *         "Transform object by jq script, returning all results as list"
- *         cdef jv value = pyobj_to_jv(pyobj, custom_encoder=self._custom_encoder)
+ *         cdef jv value = pyobj_to_jv(pyobj, encoder=self._encoder)
  */
 
   /* function exit code */
@@ -4132,7 +4132,7 @@ static PyObject *__pyx_pf_5_pyjq_6Script_8one(struct __pyx_obj_5_pyjq_Script *__
 
 /* "(tree fragment)":1
  * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
- *     raise TypeError("self._custom_encoder,self._jq cannot be converted to a Python object for pickling")
+ *     raise TypeError("self._encoder,self._jq cannot be converted to a Python object for pickling")
  * def __setstate_cython__(self, __pyx_state):
  */
 
@@ -4157,9 +4157,9 @@ static PyObject *__pyx_pf_5_pyjq_6Script_10__reduce_cython__(CYTHON_UNUSED struc
 
   /* "(tree fragment)":2
  * def __reduce_cython__(self):
- *     raise TypeError("self._custom_encoder,self._jq cannot be converted to a Python object for pickling")             # <<<<<<<<<<<<<<
+ *     raise TypeError("self._encoder,self._jq cannot be converted to a Python object for pickling")             # <<<<<<<<<<<<<<
  * def __setstate_cython__(self, __pyx_state):
- *     raise TypeError("self._custom_encoder,self._jq cannot be converted to a Python object for pickling")
+ *     raise TypeError("self._encoder,self._jq cannot be converted to a Python object for pickling")
  */
   __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -4169,7 +4169,7 @@ static PyObject *__pyx_pf_5_pyjq_6Script_10__reduce_cython__(CYTHON_UNUSED struc
 
   /* "(tree fragment)":1
  * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
- *     raise TypeError("self._custom_encoder,self._jq cannot be converted to a Python object for pickling")
+ *     raise TypeError("self._encoder,self._jq cannot be converted to a Python object for pickling")
  * def __setstate_cython__(self, __pyx_state):
  */
 
@@ -4185,9 +4185,9 @@ static PyObject *__pyx_pf_5_pyjq_6Script_10__reduce_cython__(CYTHON_UNUSED struc
 
 /* "(tree fragment)":3
  * def __reduce_cython__(self):
- *     raise TypeError("self._custom_encoder,self._jq cannot be converted to a Python object for pickling")
+ *     raise TypeError("self._encoder,self._jq cannot be converted to a Python object for pickling")
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
- *     raise TypeError("self._custom_encoder,self._jq cannot be converted to a Python object for pickling")
+ *     raise TypeError("self._encoder,self._jq cannot be converted to a Python object for pickling")
  */
 
 /* Python wrapper */
@@ -4210,9 +4210,9 @@ static PyObject *__pyx_pf_5_pyjq_6Script_12__setstate_cython__(CYTHON_UNUSED str
   __Pyx_RefNannySetupContext("__setstate_cython__", 0);
 
   /* "(tree fragment)":4
- *     raise TypeError("self._custom_encoder,self._jq cannot be converted to a Python object for pickling")
+ *     raise TypeError("self._encoder,self._jq cannot be converted to a Python object for pickling")
  * def __setstate_cython__(self, __pyx_state):
- *     raise TypeError("self._custom_encoder,self._jq cannot be converted to a Python object for pickling")             # <<<<<<<<<<<<<<
+ *     raise TypeError("self._encoder,self._jq cannot be converted to a Python object for pickling")             # <<<<<<<<<<<<<<
  */
   __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -4222,9 +4222,9 @@ static PyObject *__pyx_pf_5_pyjq_6Script_12__setstate_cython__(CYTHON_UNUSED str
 
   /* "(tree fragment)":3
  * def __reduce_cython__(self):
- *     raise TypeError("self._custom_encoder,self._jq cannot be converted to a Python object for pickling")
+ *     raise TypeError("self._encoder,self._jq cannot be converted to a Python object for pickling")
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
- *     raise TypeError("self._custom_encoder,self._jq cannot be converted to a Python object for pickling")
+ *     raise TypeError("self._encoder,self._jq cannot be converted to a Python object for pickling")
  */
 
   /* function exit code */
@@ -4416,10 +4416,10 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_n_s_collections, __pyx_k_collections, sizeof(__pyx_k_collections), 0, 0, 1, 1},
   {&__pyx_n_s_cpython, __pyx_k_cpython, sizeof(__pyx_k_cpython), 0, 0, 1, 1},
-  {&__pyx_n_s_custom_encoder, __pyx_k_custom_encoder, sizeof(__pyx_k_custom_encoder), 0, 0, 1, 1},
   {&__pyx_n_s_default, __pyx_k_default, sizeof(__pyx_k_default), 0, 0, 1, 1},
   {&__pyx_n_s_doc, __pyx_k_doc, sizeof(__pyx_k_doc), 0, 0, 1, 1},
   {&__pyx_n_s_encode, __pyx_k_encode, sizeof(__pyx_k_encode), 0, 0, 1, 1},
+  {&__pyx_n_s_encoder, __pyx_k_encoder, sizeof(__pyx_k_encoder), 0, 0, 1, 1},
   {&__pyx_n_s_enumerate, __pyx_k_enumerate, sizeof(__pyx_k_enumerate), 0, 0, 1, 1},
   {&__pyx_n_s_format, __pyx_k_format, sizeof(__pyx_k_format), 0, 0, 1, 1},
   {&__pyx_n_s_getstate, __pyx_k_getstate, sizeof(__pyx_k_getstate), 0, 0, 1, 1},
@@ -4443,7 +4443,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_reduce_cython, __pyx_k_reduce_cython, sizeof(__pyx_k_reduce_cython), 0, 0, 1, 1},
   {&__pyx_n_s_reduce_ex, __pyx_k_reduce_ex, sizeof(__pyx_k_reduce_ex), 0, 0, 1, 1},
   {&__pyx_n_s_script, __pyx_k_script, sizeof(__pyx_k_script), 0, 0, 1, 1},
-  {&__pyx_kp_s_self__custom_encoder_self__jq_ca, __pyx_k_self__custom_encoder_self__jq_ca, sizeof(__pyx_k_self__custom_encoder_self__jq_ca), 0, 0, 1, 0},
+  {&__pyx_kp_s_self__encoder_self__jq_cannot_be, __pyx_k_self__encoder_self__jq_cannot_be, sizeof(__pyx_k_self__encoder_self__jq_cannot_be), 0, 0, 1, 0},
   {&__pyx_n_s_setstate, __pyx_k_setstate, sizeof(__pyx_k_setstate), 0, 0, 1, 1},
   {&__pyx_n_s_setstate_cython, __pyx_k_setstate_cython, sizeof(__pyx_k_setstate_cython), 0, 0, 1, 1},
   {&__pyx_n_s_six, __pyx_k_six, sizeof(__pyx_k_six), 0, 0, 1, 1},
@@ -4475,7 +4475,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
   /* "_pyjq.pyx":133
- * cdef jv pyobj_to_jv(object pyobj, void*custom_encoder=NULL):
+ * cdef jv pyobj_to_jv(object pyobj, void*encoder=NULL):
  *     if isinstance(pyobj, six.text_type):
  *         pyobj = pyobj.encode('utf-8')             # <<<<<<<<<<<<<<
  *         return jv_string_sized(pyobj, len(pyobj))
@@ -4519,20 +4519,20 @@ static int __Pyx_InitCachedConstants(void) {
 
   /* "(tree fragment)":2
  * def __reduce_cython__(self):
- *     raise TypeError("self._custom_encoder,self._jq cannot be converted to a Python object for pickling")             # <<<<<<<<<<<<<<
+ *     raise TypeError("self._encoder,self._jq cannot be converted to a Python object for pickling")             # <<<<<<<<<<<<<<
  * def __setstate_cython__(self, __pyx_state):
- *     raise TypeError("self._custom_encoder,self._jq cannot be converted to a Python object for pickling")
+ *     raise TypeError("self._encoder,self._jq cannot be converted to a Python object for pickling")
  */
-  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_kp_s_self__custom_encoder_self__jq_ca); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(1, 2, __pyx_L1_error)
+  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_kp_s_self__encoder_self__jq_cannot_be); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(1, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__8);
   __Pyx_GIVEREF(__pyx_tuple__8);
 
   /* "(tree fragment)":4
- *     raise TypeError("self._custom_encoder,self._jq cannot be converted to a Python object for pickling")
+ *     raise TypeError("self._encoder,self._jq cannot be converted to a Python object for pickling")
  * def __setstate_cython__(self, __pyx_state):
- *     raise TypeError("self._custom_encoder,self._jq cannot be converted to a Python object for pickling")             # <<<<<<<<<<<<<<
+ *     raise TypeError("self._encoder,self._jq cannot be converted to a Python object for pickling")             # <<<<<<<<<<<<<<
  */
-  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_s_self__custom_encoder_self__jq_ca); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(1, 4, __pyx_L1_error)
+  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_s_self__encoder_self__jq_cannot_be); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(1, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__9);
   __Pyx_GIVEREF(__pyx_tuple__9);
 
@@ -4984,9 +4984,9 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "_pyjq.pyx":174
- *     cdef PyObject* _custom_encoder
+ *     cdef PyObject* _encoder
  * 
- *     def __init__(self, const char*script, vars={}, library_paths=[], custom_encoder=None):             # <<<<<<<<<<<<<<
+ *     def __init__(self, const char*script, vars={}, library_paths=[], encoder=None):             # <<<<<<<<<<<<<<
  *         self._errors = []
  *         self._jq = jq_init()
  */
@@ -6987,204 +6987,8 @@ bad:
     Py_XDECREF(py_frame);
 }
 
-/* None */
-        #ifdef __FreeBSD__
-#include <floatingpoint.h>
-#endif
-#if PY_MAJOR_VERSION < 3
-int main(int argc, char** argv) {
-#elif defined(WIN32) || defined(MS_WINDOWS)
-int wmain(int argc, wchar_t **argv) {
-#else
-static int __Pyx_main(int argc, wchar_t **argv) {
-#endif
-    /* 754 requires that FP exceptions run in "no stop" mode by default,
-     * and until C vendors implement C99's ways to control FP exceptions,
-     * Python requires non-stop mode.  Alas, some platforms enable FP
-     * exceptions by default.  Here we disable them.
-     */
-#ifdef __FreeBSD__
-    fp_except_t m;
-    m = fpgetmask();
-    fpsetmask(m & ~FP_X_OFL);
-#endif
-    if (argc && argv)
-        Py_SetProgramName(argv[0]);
-    Py_Initialize();
-    if (argc && argv)
-        PySys_SetArgv(argc, argv);
-    {
-      PyObject* m = NULL;
-      __pyx_module_is_main__pyjq = 1;
-      #if PY_MAJOR_VERSION < 3
-          init_pyjq();
-      #elif CYTHON_PEP489_MULTI_PHASE_INIT
-          m = PyInit__pyjq();
-          if (!PyModule_Check(m)) {
-              PyModuleDef *mdef = (PyModuleDef *) m;
-              PyObject *modname = PyUnicode_FromString("__main__");
-              m = NULL;
-              if (modname) {
-                  m = PyModule_NewObject(modname);
-                  Py_DECREF(modname);
-                  if (m) PyModule_ExecDef(m, mdef);
-              }
-          }
-      #else
-          m = PyInit__pyjq();
-      #endif
-      if (PyErr_Occurred()) {
-          PyErr_Print();
-          #if PY_MAJOR_VERSION < 3
-          if (Py_FlushLine()) PyErr_Clear();
-          #endif
-          return 1;
-      }
-      Py_XDECREF(m);
-    }
-    Py_Finalize();
-    return 0;
-}
-#if PY_MAJOR_VERSION >= 3 && !defined(WIN32) && !defined(MS_WINDOWS)
-#include <locale.h>
-static wchar_t*
-__Pyx_char2wchar(char* arg)
-{
-    wchar_t *res;
-#ifdef HAVE_BROKEN_MBSTOWCS
-    /* Some platforms have a broken implementation of
-     * mbstowcs which does not count the characters that
-     * would result from conversion.  Use an upper bound.
-     */
-    size_t argsize = strlen(arg);
-#else
-    size_t argsize = mbstowcs(NULL, arg, 0);
-#endif
-    size_t count;
-    unsigned char *in;
-    wchar_t *out;
-#ifdef HAVE_MBRTOWC
-    mbstate_t mbs;
-#endif
-    if (argsize != (size_t)-1) {
-        res = (wchar_t *)malloc((argsize+1)*sizeof(wchar_t));
-        if (!res)
-            goto oom;
-        count = mbstowcs(res, arg, argsize+1);
-        if (count != (size_t)-1) {
-            wchar_t *tmp;
-            /* Only use the result if it contains no
-               surrogate characters. */
-            for (tmp = res; *tmp != 0 &&
-                     (*tmp < 0xd800 || *tmp > 0xdfff); tmp++)
-                ;
-            if (*tmp == 0)
-                return res;
-        }
-        free(res);
-    }
-#ifdef HAVE_MBRTOWC
-    /* Overallocate; as multi-byte characters are in the argument, the
-       actual output could use less memory. */
-    argsize = strlen(arg) + 1;
-    res = (wchar_t *)malloc(argsize*sizeof(wchar_t));
-    if (!res) goto oom;
-    in = (unsigned char*)arg;
-    out = res;
-    memset(&mbs, 0, sizeof mbs);
-    while (argsize) {
-        size_t converted = mbrtowc(out, (char*)in, argsize, &mbs);
-        if (converted == 0)
-            break;
-        if (converted == (size_t)-2) {
-            /* Incomplete character. This should never happen,
-               since we provide everything that we have -
-               unless there is a bug in the C library, or I
-               misunderstood how mbrtowc works. */
-            fprintf(stderr, "unexpected mbrtowc result -2\\n");
-            free(res);
-            return NULL;
-        }
-        if (converted == (size_t)-1) {
-            /* Conversion error. Escape as UTF-8b, and start over
-               in the initial shift state. */
-            *out++ = 0xdc00 + *in++;
-            argsize--;
-            memset(&mbs, 0, sizeof mbs);
-            continue;
-        }
-        if (*out >= 0xd800 && *out <= 0xdfff) {
-            /* Surrogate character.  Escape the original
-               byte sequence with surrogateescape. */
-            argsize -= converted;
-            while (converted--)
-                *out++ = 0xdc00 + *in++;
-            continue;
-        }
-        in += converted;
-        argsize -= converted;
-        out++;
-    }
-#else
-    /* Cannot use C locale for escaping; manually escape as if charset
-       is ASCII (i.e. escape all bytes > 128. This will still roundtrip
-       correctly in the locale's charset, which must be an ASCII superset. */
-    res = (wchar_t *)malloc((strlen(arg)+1)*sizeof(wchar_t));
-    if (!res) goto oom;
-    in = (unsigned char*)arg;
-    out = res;
-    while(*in)
-        if(*in < 128)
-            *out++ = *in++;
-        else
-            *out++ = 0xdc00 + *in++;
-    *out = 0;
-#endif
-    return res;
-oom:
-    fprintf(stderr, "out of memory\\n");
-    return NULL;
-}
-int
-main(int argc, char **argv)
-{
-    if (!argc) {
-        return __Pyx_main(0, NULL);
-    }
-    else {
-        int i, res;
-        wchar_t **argv_copy = (wchar_t **)malloc(sizeof(wchar_t*)*argc);
-        wchar_t **argv_copy2 = (wchar_t **)malloc(sizeof(wchar_t*)*argc);
-        char *oldloc = strdup(setlocale(LC_ALL, NULL));
-        if (!argv_copy || !argv_copy2 || !oldloc) {
-            fprintf(stderr, "out of memory\\n");
-            free(argv_copy);
-            free(argv_copy2);
-            free(oldloc);
-            return 1;
-        }
-        res = 0;
-        setlocale(LC_ALL, "");
-        for (i = 0; i < argc; i++) {
-            argv_copy2[i] = argv_copy[i] = __Pyx_char2wchar(argv[i]);
-            if (!argv_copy[i]) res = 1;
-        }
-        setlocale(LC_ALL, oldloc);
-        free(oldloc);
-        if (res == 0)
-            res = __Pyx_main(argc, argv_copy);
-        for (i = 0; i < argc; i++) {
-            free(argv_copy2[i]);
-        }
-        free(argv_copy);
-        free(argv_copy2);
-        return res;
-    }
-}
-#endif
-
 /* CIntToPy */
-            static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
+        static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
     const int neg_one = (int) -1, const_zero = (int) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
@@ -7215,7 +7019,7 @@ main(int argc, char **argv)
 }
 
 /* CIntFromPyVerify */
-            #define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)\
+        #define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)\
     __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 0)
 #define __PYX_VERIFY_RETURN_INT_EXC(target_type, func_type, func_value)\
     __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 1)
@@ -7237,7 +7041,7 @@ main(int argc, char **argv)
     }
 
 /* CIntToPy */
-            static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
+        static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
     const long neg_one = (long) -1, const_zero = (long) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
@@ -7268,7 +7072,7 @@ main(int argc, char **argv)
 }
 
 /* CIntFromPy */
-            static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *x) {
+        static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *x) {
     const int neg_one = (int) -1, const_zero = (int) 0;
     const int is_unsigned = neg_one > const_zero;
 #if PY_MAJOR_VERSION < 3
@@ -7457,7 +7261,7 @@ raise_neg_overflow:
 }
 
 /* CIntFromPy */
-            static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *x) {
+        static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *x) {
     const long neg_one = (long) -1, const_zero = (long) 0;
     const int is_unsigned = neg_one > const_zero;
 #if PY_MAJOR_VERSION < 3
@@ -7646,7 +7450,7 @@ raise_neg_overflow:
 }
 
 /* FastTypeChecks */
-            #if CYTHON_COMPILING_IN_CPYTHON
+        #if CYTHON_COMPILING_IN_CPYTHON
 static int __Pyx_InBases(PyTypeObject *a, PyTypeObject *b) {
     while (a) {
         a = a->tp_base;
@@ -7746,7 +7550,7 @@ static CYTHON_INLINE int __Pyx_PyErr_GivenExceptionMatches2(PyObject *err, PyObj
 #endif
 
 /* CheckBinaryVersion */
-            static int __Pyx_check_binary_version(void) {
+        static int __Pyx_check_binary_version(void) {
     char ctversion[4], rtversion[4];
     PyOS_snprintf(ctversion, 4, "%d.%d", PY_MAJOR_VERSION, PY_MINOR_VERSION);
     PyOS_snprintf(rtversion, 4, "%s", Py_GetVersion());
@@ -7762,7 +7566,7 @@ static CYTHON_INLINE int __Pyx_PyErr_GivenExceptionMatches2(PyObject *err, PyObj
 }
 
 /* ModuleImport */
-            #ifndef __PYX_HAVE_RT_ImportModule
+        #ifndef __PYX_HAVE_RT_ImportModule
 #define __PYX_HAVE_RT_ImportModule
 static PyObject *__Pyx_ImportModule(const char *name) {
     PyObject *py_name = 0;
@@ -7780,7 +7584,7 @@ bad:
 #endif
 
 /* TypeImport */
-            #ifndef __PYX_HAVE_RT_ImportType
+        #ifndef __PYX_HAVE_RT_ImportType
 #define __PYX_HAVE_RT_ImportType
 static PyTypeObject *__Pyx_ImportType(const char *module_name, const char *class_name,
     size_t size, int strict)
@@ -7845,7 +7649,7 @@ bad:
 #endif
 
 /* InitStrings */
-            static int __Pyx_InitStrings(__Pyx_StringTabEntry *t) {
+        static int __Pyx_InitStrings(__Pyx_StringTabEntry *t) {
     while (t->p) {
         #if PY_MAJOR_VERSION < 3
         if (t->is_unicode) {

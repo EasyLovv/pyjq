@@ -128,7 +128,7 @@ cdef object jv_to_pyobj(jv jval):
             it = jv_object_iter_next(jval, it)
         return adict
 
-cdef jv pyobj_to_jv(object pyobj, void*custom_encoder=NULL):
+cdef jv pyobj_to_jv(object pyobj, void*encoder=NULL):
     if isinstance(pyobj, six.text_type):
         pyobj = pyobj.encode('utf-8')
         return jv_string_sized(pyobj, len(pyobj))
@@ -141,7 +141,7 @@ cdef jv pyobj_to_jv(object pyobj, void*custom_encoder=NULL):
     elif isinstance(pyobj, (list, tuple)):
         jval = jv_array()
         for i, item in enumerate(pyobj):
-            jval = jv_array_append(jval, pyobj_to_jv(item, custom_encoder))
+            jval = jv_array_append(jval, pyobj_to_jv(item, encoder))
         return jval
     elif isinstance(pyobj, dict):
         jval = jv_object()
@@ -151,13 +151,13 @@ cdef jv pyobj_to_jv(object pyobj, void*custom_encoder=NULL):
                     key = six.text_type(key)
             else:
                 raise TypeError("Key of json object must be a str, but got {}".format(type(key)))
-            jval = jv_object_set(jval, pyobj_to_jv(key, custom_encoder), pyobj_to_jv(value, custom_encoder))
+            jval = jv_object_set(jval, pyobj_to_jv(key, encoder), pyobj_to_jv(value, encoder))
         return jval
     elif pyobj is None:
         return jv_null()
     else:
-        if custom_encoder != NULL:
-            return pyobj_to_jv((<object>custom_encoder)(pyobj))
+        if encoder != NULL:
+            return pyobj_to_jv((<object>encoder)(pyobj))
         raise TypeError("{!r} could not be converted to json!!".format(type(pyobj)))
 
 cdef void Script_error_cb(void*x, jv err):
@@ -169,14 +169,14 @@ cdef class Script:
     'Compiled jq script object'
     cdef object _errors
     cdef jq_state*_jq
-    cdef PyObject* _custom_encoder
+    cdef PyObject* _encoder
 
-    def __init__(self, const char*script, vars={}, library_paths=[], custom_encoder=None):
+    def __init__(self, const char*script, vars={}, library_paths=[], encoder=None):
         self._errors = []
         self._jq = jq_init()
 
-        if custom_encoder is not None:
-            self._custom_encoder = <PyObject*>custom_encoder
+        if encoder is not None:
+            self._encoder = <PyObject*>encoder
 
         if not self._jq:
             raise RuntimeError('Failed to initialize jq')
@@ -204,7 +204,7 @@ cdef class Script:
 
     def all(self, pyobj):
         "Transform object by jq script, returning all results as list"
-        cdef jv value = pyobj_to_jv(pyobj, custom_encoder=self._custom_encoder)
+        cdef jv value = pyobj_to_jv(pyobj, encoder=self._encoder)
         jq_start(self._jq, value, 0)
         cdef list output = []
 

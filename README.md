@@ -133,9 +133,9 @@ Example:
 ...         return value.timestamp()
 ...     return value
 >>> 
->>> pyjq.one(".", {"now": datetime.datetime.now()}, custom_encoder=c_encoder)
+>>> pyjq.one(".", {"now": datetime.datetime.now()}, encoder=c_encoder)
 {'now': 1533283952.956293}
->>> compiled_jq = pyjq.compile(".", custom_encoder=c_encoder)
+>>> compiled_jq = pyjq.compile(".", encoder=c_encoder)
 >>> compiled_jq.one({"now": datetime.datetime.now()})
 {'now': 1533284075.547344}
 

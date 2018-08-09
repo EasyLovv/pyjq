@@ -8,7 +8,7 @@ import _pyjq
 __all__ = []
 
 
-def compile(script, vars={}, library_paths=[], custom_encoder=None):
+def compile(script, vars={}, library_paths=[], encoder=None):
     """
     Compile a jq script, retuning a script object.
 
@@ -16,7 +16,7 @@ def compile(script, vars={}, library_paths=[], custom_encoder=None):
     """
 
     return _pyjq.Script(script.encode('utf-8'), vars=vars,
-                        library_paths=library_paths, custom_encoder=custom_encoder)
+                        library_paths=library_paths, encoder=encoder)
 
 
 def default_opener(url):
@@ -42,35 +42,35 @@ def _get_value(value, url, opener):
     return value
 
 
-def all(script, value=None, vars={}, url=None, opener=default_opener, library_paths=[], custom_encoder=None):
+def all(script, value=None, vars={}, url=None, opener=default_opener, library_paths=[], encoder=None):
     """
     Transform value by script, returning all results as list.
     """
-    return compile(script, vars, library_paths, custom_encoder).all(_get_value(value, url, opener))
+    return compile(script, vars, library_paths, encoder).all(_get_value(value, url, opener))
 
 
-def apply(script, value=None, vars={}, url=None, opener=default_opener, library_paths=[], custom_encoder=None):
+def apply(script, value=None, vars={}, url=None, opener=default_opener, library_paths=[], encoder=None):
     """
     Transform value by script, returning all results as list.
     """
-    return all(script, value, vars, url, opener, library_paths, custom_encoder)
+    return all(script, value, vars, url, opener, library_paths, encoder)
 
 
 apply.__doc__ = all.__doc__
 
 
 def first(script, value=None, default=None, vars={}, url=None, opener=default_opener, library_paths=[],
-          custom_encoder=None):
+          encoder=None):
     """
     Transform object by jq script, returning the first result.
     Return default if result is empty.
     """
-    return compile(script, vars, library_paths, custom_encoder).first(_get_value(value, url, opener), default)
+    return compile(script, vars, library_paths, encoder).first(_get_value(value, url, opener), default)
 
 
-def one(script, value=None, vars={}, url=None, opener=default_opener, library_paths=[], custom_encoder=None):
+def one(script, value=None, vars={}, url=None, opener=default_opener, library_paths=[], encoder=None):
     """
     Transform object by jq script, returning the first result.
     Raise ValueError unless results does not include exactly one element.
     """
-    return compile(script, vars, library_paths, custom_encoder).one(_get_value(value, url, opener))
+    return compile(script, vars, library_paths, encoder).one(_get_value(value, url, opener))
