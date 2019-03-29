@@ -123,18 +123,20 @@ Limitation
 jq is a JSON Processor. Therefore pyjq is able to process only
 "JSON compatible" data (object made only from str, int, float, list, dict).
 
-To avoid this "Limitation" you could pass the "custom_encoder" function which will pre-process "unsupported types"
- 
+To avoid this "Limitation" you could pass the "encoder" function which will
+pre-process "unsupported types".
+
 Example:
-```
+
+```python
 >>> import pyjq
 >>> import datetime
->>> 
+>>>
 >>> def c_encoder(value):
 ...     if isinstance(value, datetime.datetime):
 ...         return value.timestamp()
 ...     return value
->>> 
+>>>
 >>> pyjq.one(".", {"now": datetime.datetime.now()}, encoder=c_encoder)
 {'now': 1533283952.956293}
 >>> compiled_jq = pyjq.compile(".", encoder=c_encoder)
